@@ -202,39 +202,6 @@ db.users.find({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 db.registros.find();
 //ej1
 db.registros.find({ edad: {$gte:18}});
@@ -408,3 +375,63 @@ db.registros.find(
 
 
 )
+
+//ej15
+db.registros.find(
+   {
+       paìs:"Brasil",
+       $or:[
+           {peso:{$lt:120}},
+           {peso:{$gt:140}}
+       ]
+
+   }
+)
+
+//ej16
+db.usuarios.find({
+   $or: [
+       { país: "Argentina", edad: { $lt: 25 } },
+       { país: "Chile", edad: { $lt: 25 } }
+   ]
+})
+
+
+
+//ej17
+db.usuarios.find({
+   $and: [
+       {
+           $nor: [
+               { país: "España" },
+               { país: "México" }
+           ]
+       },
+       { salario: { $lt: 3000 } }
+   ]
+})
+
+
+//ej18
+db.usuarios.find({
+   país: "Alemania",
+   $or: [
+       { salario: { $lt: 4000 } },
+       { edad: { $gt: 35 } }
+   ]
+})
+
+//ej19
+db.usuarios.find({
+   $and: [
+       { país: { $ne: "Colombia" } },
+       { altura: { $lt: 170 } }
+   ]
+})
+
+
+//ej20
+db.usuarios.find({
+   país: "India",
+   salario: { $exists: false }
+})
